@@ -22,8 +22,11 @@ func TestCompact(t *testing.T) {
 }
 
 func doCompact(key int, wg *sync.WaitGroup) {
+	compactor := NewCompactor(1000, func(key int, payload []byte) {
+		fmt.Println(key, string(payload))
+	})
 	for i := 0; i < 100; i++ {
-		CompactInstance.reqChan <- compactArgs{key: key, logs: []int{1}}
+		compactor.reqChan <- compactArgs{key: key, logs: []int{1}}
 	}
 	wg.Done()
 }

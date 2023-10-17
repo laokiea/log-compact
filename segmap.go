@@ -2,10 +2,9 @@ package compact
 
 import (
 	"fmt"
-	"git.ourbluecity.com/infrastructure/Hermes-Sync-Main-Go/internal/log"
 	"hash/fnv"
+	"log"
 	"runtime"
-	"strconv"
 	"sync"
 )
 
@@ -42,7 +41,7 @@ func NewSegmentMutex(l int) SegmentMutex {
 		// used to debug panic whether it comes from GC
 		runtime.SetFinalizer(shard, func(s *SegmentShard) {
 			// runtime.KeepAlive(s)
-			log.Info("runtime gc obj", log.FieldMap{"len": strconv.Itoa(len(s.shard))}, nil)
+			log.Printf("runtime gc obj, shards size: %d\n", len(s.shard))
 		})
 		stack[i] = shard
 	}

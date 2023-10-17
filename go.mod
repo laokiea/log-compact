@@ -1,4 +1,4 @@
-module log-compact
+module git.ourbluecity.com/sashengpeng/log-compact
 
 go 1.19
 
